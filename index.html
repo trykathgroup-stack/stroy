@@ -49,6 +49,7 @@
             --icon-color: #1e293b;
             --scrollbar-track: #e2e8f0;
             --scrollbar-thumb: #94a3b8;
+            --search-bg: white;
         }
 
         /* ===== ТЁМНАЯ ТЕМА ===== */
@@ -89,6 +90,7 @@
             --icon-color: #f1f5f9;
             --scrollbar-track: #1e293b;
             --scrollbar-thumb: #475569;
+            --search-bg: #1e293b;
         }
 
         * {
@@ -231,9 +233,58 @@
             display: none;
         }
 
+        /* ===== ПОИСК ===== */
+        .search-section {
+            padding: 30px 0 10px;
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 1px solid var(--border-light);
+            border-radius: 100px;
+            font-size: 16px;
+            background: var(--search-bg);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--gradient-start);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-btn {
+            padding: 16px 28px;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
         /* ===== HERO ===== */
         .hero {
-            padding: 80px 0;
+            padding: 60px 0 40px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
@@ -330,16 +381,49 @@
             display: block;
         }
 
+        /* ===== КАТЕГОРИИ-ВКЛАДКИ ===== */
+        .categories-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .category-tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 100px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .category-tab:hover {
+            background: var(--product-img-bg);
+            color: var(--text-primary);
+        }
+
+        .category-tab.active {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+        }
+
         /* ===== ФИЛЬТРЫ ===== */
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .section-header h2 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             letter-spacing: -0.5px;
             color: var(--heading-color);
@@ -369,18 +453,25 @@
             box-shadow: 0 6px 12px rgba(15, 23, 42, 0.1);
         }
 
+        /* ===== СЧЁТЧИК ТОВАРОВ ===== */
+        .products-count {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
         /* ===== КАРТОЧКИ ===== */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .product-card {
             background: var(--bg-card);
-            border-radius: 28px;
-            padding: 24px 20px 28px;
+            border-radius: 24px;
+            padding: 20px 18px 24px;
             box-shadow: var(--shadow-card);
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             border: 1px solid var(--border-card);
@@ -390,20 +481,20 @@
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
             border-color: var(--border-light);
         }
 
         .product-img {
             background: var(--product-img-bg);
-            border-radius: 20px;
-            height: 180px;
+            border-radius: 18px;
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 48px;
+            margin-bottom: 16px;
+            font-size: 42px;
             color: var(--gradient-start);
             transition: background 0.2s;
         }
@@ -414,24 +505,25 @@
 
         .product-category {
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+            margin-bottom: 5px;
         }
 
         .product-title {
             font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 8px;
+            font-size: 18px;
+            margin-bottom: 6px;
             color: var(--heading-color);
+            line-height: 1.3;
         }
 
         .product-desc {
             color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 20px;
+            font-size: 13px;
+            margin-bottom: 16px;
             line-height: 1.4;
         }
 
@@ -444,27 +536,27 @@
 
         .product-price {
             font-weight: 700;
-            font-size: 22px;
+            font-size: 20px;
             color: var(--heading-color);
         }
 
         .product-price small {
             font-weight: 400;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-muted);
         }
 
         .cart-btn {
             background: var(--cart-btn-bg);
             border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--cart-btn-text);
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.2s;
             border: 1px solid transparent;
@@ -478,7 +570,7 @@
 
         /* ===== FEATURES ===== */
         .features {
-            padding: 60px 0 80px;
+            padding: 50px 0 60px;
             border-top: 1px solid var(--border-light);
         }
 
@@ -550,6 +642,15 @@
             color: var(--nav-link-hover);
         }
 
+        /* Стили для выделения найденного текста */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-size: 18px;
+            grid-column: 1 / -1;
+        }
+
         /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
         @media (max-width: 768px) {
             .hero {
@@ -581,6 +682,13 @@
                 flex-direction: column;
                 gap: 20px;
             }
+
+            .categories-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 15px;
+                -webkit-overflow-scrolling: touch;
+            }
         }
     </style>
 </head>
@@ -592,15 +700,14 @@
             <div class="logo">СТРОЙ</div>
             <div class="nav-links">
                 <a href="#" class="active">Главная</a>
-                <a href="#">Каталог</a>
-                <a href="#">Проекты</a>
-                <a href="#">Контакты</a>
+                <a href="#catalog">Каталог</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#contacts">Контакты</a>
             </div>
             <div class="nav-icons">
                 <a href="#"><i class="far fa-heart"></i></a>
                 <a href="#"><i class="far fa-user"></i></a>
                 <a href="#"><i class="fas fa-shopping-cart"></i></a>
-                <!-- Переключатель темы -->
                 <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
@@ -611,15 +718,25 @@
 </header>
 
 <main>
+    <!-- Поиск -->
     <div class="container">
-        <!-- Hero -->
+        <div class="search-section">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" id="searchInput" placeholder="Поиск по товарам... (например, цемент, плитка, брус)">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> Найти</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero (компактный) -->
         <section class="hero">
             <div class="hero-content">
-                <span class="hero-badge">🏗️ Новое поступление</span>
-                <h1>Строй <span>с комфортом</span> и стилем</h1>
-                <p>Премиальные материалы для ремонта и строительства с доставкой по всей стране. Гарантия качества от ведущих брендов.</p>
+                <span class="hero-badge">🏗️ Стройматериалы с доставкой</span>
+                <h1>Всё для <span>стройки</span> в одном месте</h1>
+                <p>ЖБИ, пиломатериалы, сухие смеси, тротуарная плитка и многое другое. Прямые поставки, честные цены.</p>
                 <div>
-                    <a href="#" class="btn">Смотреть каталог <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+                    <a href="#catalog" class="btn">Смотреть каталог <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
                     <a href="#" class="btn btn-outline">Консультация</a>
                 </div>
             </div>
@@ -628,77 +745,33 @@
             </div>
         </section>
 
+        <!-- Категории-вкладки -->
+        <div class="categories-tabs" id="categoryTabs">
+            <button class="category-tab active" data-category="all">Все товары</button>
+            <button class="category-tab" data-category="cement">Цемент и смеси</button>
+            <button class="category-tab" data-category="rings">Кольца ЖБИ</button>
+            <button class="category-tab" data-category="tiles">Плитка и брусчатка</button>
+            <button class="category-tab" data-category="bricks">Кирпич и блоки</button>
+            <button class="category-tab" data-category="wood">Пиломатериалы</button>
+            <button class="category-tab" data-category="pipes">Трубы и комплектующие</button>
+        </div>
+
         <!-- Каталог -->
-        <section>
+        <section id="catalog">
             <div class="section-header">
-                <h2>Популярные материалы</h2>
-                <div class="filter-tabs">
-                    <button class="filter-btn active">Все товары</button>
-                    <button class="filter-btn">Бетон</button>
-                    <button class="filter-btn">Дерево</button>
-                    <button class="filter-btn">Кровля</button>
-                </div>
+                <h2>Каталог товаров</h2>
             </div>
             
-            <div class="products-grid">
-                <!-- Карточка 1 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-cube"></i>
-                    </div>
-                    <div class="product-category">Бетон / Фундамент</div>
-                    <div class="product-title">Бетон М350</div>
-                    <div class="product-desc">Высокопрочный товарный бетон с доставкой миксерами.</div>
-                    <div class="product-footer">
-                        <div class="product-price">4 890 ₽ <small>/м³</small></div>
-                        <button class="cart-btn"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-                <!-- Карточка 2 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-border-all"></i>
-                    </div>
-                    <div class="product-category">Кровля / Металл</div>
-                    <div class="product-title">Металлочерепица</div>
-                    <div class="product-desc">Модульная, полимерное покрытие, цвет RAL 7024.</div>
-                    <div class="product-footer">
-                        <div class="product-price">620 ₽ <small>/м²</small></div>
-                        <button class="cart-btn"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-                <!-- Карточка 3 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-tree"></i>
-                    </div>
-                    <div class="product-category">Пиломатериалы</div>
-                    <div class="product-title">Доска строганная</div>
-                    <div class="product-desc">Сорт АВ, камерная сушка, 50х150 мм.</div>
-                    <div class="product-footer">
-                        <div class="product-price">18 500 ₽ <small>/м³</small></div>
-                        <button class="cart-btn"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-                <!-- Карточка 4 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-fill-drip"></i>
-                    </div>
-                    <div class="product-category">Сухие смеси</div>
-                    <div class="product-title">Штукатурка гипсовая</div>
-                    <div class="product-desc">Для стен и потолков, 30 кг, белая.</div>
-                    <div class="product-footer">
-                        <div class="product-price">485 ₽ <small>/шт</small></div>
-                        <button class="cart-btn"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
+            <div class="products-count" id="productsCount">Показано товаров: <span id="countValue">0</span></div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Товары будут загружены через JavaScript -->
             </div>
         </section>
     </div>
 
     <!-- Преимущества -->
-    <section class="features">
+    <section class="features" id="delivery">
         <div class="container">
             <div class="features-grid">
                 <div class="feature-item">
@@ -721,7 +794,7 @@
     </section>
 </main>
 
-<footer>
+<footer id="contacts">
     <div class="container">
         <div class="footer-content">
             <div class="footer-copyright">
@@ -739,50 +812,200 @@
 
 <script>
     (function() {
+        // ===== БАЗА ТОВАРОВ =====
+        const products = [
+            // Цемент и смеси
+            { name: "Цемент 50кг", category: "cement", subcategory: "Цемент", price: "550", unit: "шт", desc: "Портландцемент М500, 50 кг" },
+            { name: "Цемент 25кг", category: "cement", subcategory: "Цемент", price: "285", unit: "шт", desc: "Портландцемент М500, 25 кг" },
+            { name: "Клей для газоблока", category: "cement", subcategory: "Смеси", price: "240", unit: "шт", desc: "Специальный клей для газобетонных блоков" },
+            { name: "ЦПС М150", category: "cement", subcategory: "Смеси", price: "190", unit: "шт", desc: "Цементно-песчаная смесь М150" },
+            { name: "ЦПС М200", category: "cement", subcategory: "Смеси", price: "210", unit: "шт", desc: "Цементно-песчаная смесь М200" },
+            { name: "ЦПС М300", category: "cement", subcategory: "Смеси", price: "260", unit: "шт", desc: "Цементно-песчаная смесь М300" },
+            { name: "Шпаклёвка LR финишная", category: "cement", subcategory: "Смеси", price: "430", unit: "шт", desc: "Финишная шпаклёвка, высокое качество" },
+            
+            // Кольца ЖБИ
+            { name: "Кольцо 0.8м", category: "rings", subcategory: "Кольца ЖБИ", price: "2600", unit: "шт", desc: "Железобетонное кольцо, диаметр 0.8 м" },
+            { name: "Кольцо 1м", category: "rings", subcategory: "Кольца ЖБИ", price: "2700", unit: "шт", desc: "Железобетонное кольцо, диаметр 1 м" },
+            { name: "Кольцо 1.5м (в.0.8)", category: "rings", subcategory: "Кольца ЖБИ", price: "5300", unit: "шт", desc: "Кольцо ЖБИ 1.5 м, высота 0.8 м" },
+            { name: "Кольцо 1.5м (в.0.9)", category: "rings", subcategory: "Кольца ЖБИ", price: "5500", unit: "шт", desc: "Кольцо ЖБИ 1.5 м, высота 0.9 м" },
+            { name: "Кольцо 2.0м (в.0.9)", category: "rings", subcategory: "Кольца ЖБИ", price: "10000", unit: "шт", desc: "Кольцо ЖБИ 2.0 м, высота 0.9 м" },
+            { name: "Половинка кольца 1м", category: "rings", subcategory: "Кольца ЖБИ", price: "2200", unit: "шт", desc: "Половинка железобетонного кольца 1 м" },
+            { name: "Половинка кольца 1.5м", category: "rings", subcategory: "Кольца ЖБИ", price: "4200", unit: "шт", desc: "Половинка железобетонного кольца 1.5 м" },
+            { name: "Крышка с люком 0.8м", category: "rings", subcategory: "Крышки и днища", price: "3500", unit: "шт", desc: "Крышка с люком для кольца 0.8 м" },
+            { name: "Крышка с люком 1м", category: "rings", subcategory: "Крышки и днища", price: "3700", unit: "шт", desc: "Крышка с люком для кольца 1 м" },
+            { name: "Крышка с люком 1.5м", category: "rings", subcategory: "Крышки и днища", price: "6000", unit: "шт", desc: "Крышка с люком для кольца 1.5 м" },
+            { name: "Крышка без люка 1.5м", category: "rings", subcategory: "Крышки и днища", price: "5500", unit: "шт", desc: "Крышка без люка для кольца 1.5 м" },
+            { name: "Крышка с люком 2.0м", category: "rings", subcategory: "Крышки и днища", price: "10000", unit: "шт", desc: "Крышка с люком для кольца 2.0 м" },
+            { name: "Донышко 0.8м", category: "rings", subcategory: "Крышки и днища", price: "2000", unit: "шт", desc: "Днище для кольца 0.8 м" },
+            { name: "Донышко 1м", category: "rings", subcategory: "Крышки и днища", price: "2200", unit: "шт", desc: "Днище для кольца 1 м" },
+            { name: "Донышко 1.5м", category: "rings", subcategory: "Крышки и днища", price: "4000", unit: "шт", desc: "Днище для кольца 1.5 м" },
+            { name: "Конус люк 1м", category: "rings", subcategory: "Крышки и днища", price: "2200", unit: "шт", desc: "Конус с люком 1 м" },
+            { name: "Люк газонный", category: "rings", subcategory: "Крышки и днища", price: "700", unit: "шт", desc: "Газонный люк" },
+            
+            // Плитка
+            { name: "Плитка серая 30x30", category: "tiles", subcategory: "Плитка", price: "550", unit: "м²", desc: "Тротуарная плитка серая, 30x30 см" },
+            { name: "Плитка красная 30x30", category: "tiles", subcategory: "Плитка", price: "750", unit: "м²", desc: "Тротуарная плитка красная, 30x30 см" },
+            { name: "Плитка серая 40x40", category: "tiles", subcategory: "Плитка", price: "140", unit: "шт", desc: "Плитка серая 40x40 см, цена за штуку" },
+            { name: "Плитка красная 40x40", category: "tiles", subcategory: "Плитка", price: "200", unit: "шт", desc: "Плитка красная 40x40 см, цена за штуку" },
+            { name: "Плитка 30x30 (брак)", category: "tiles", subcategory: "Плитка", price: "400", unit: "м²", desc: "Плитка 30x30 см, 2 сорт (брак)" },
+            { name: "Плитка 40x40 (брак)", category: "tiles", subcategory: "Плитка", price: "90", unit: "шт", desc: "Плитка 40x40 см, 2 сорт (брак)" },
+            { name: "Бордюр вибролитьё 1м", category: "tiles", subcategory: "Бордюры", price: "250", unit: "шт", desc: "Бордюр вибролитьевой, 1 метр" },
+            { name: "Бордюр вибролитьё 1м красный", category: "tiles", subcategory: "Бордюры", price: "400", unit: "шт", desc: "Бордюр вибролитьевой красный, 1 метр" },
+            { name: "Бордюр вибропресс 1м", category: "tiles", subcategory: "Бордюры", price: "300", unit: "шт", desc: "Бордюр вибропрессованный, 1 метр" },
+            { name: "Бордюр вибролитьё 0.5м", category: "tiles", subcategory: "Бордюры", price: "150", unit: "шт", desc: "Бордюр вибролитьевой, 0.5 метра" },
+            { name: "Слив", category: "tiles", subcategory: "Бордюры", price: "150", unit: "шт", desc: "Слив водосточный бетонный" },
+            { name: "Дорожный бордюр 1м", category: "tiles", subcategory: "Бордюры", price: "700", unit: "шт", desc: "Бордюр дорожный, 1 метр" },
+            { name: "Брусчатка 4см", category: "tiles", subcategory: "Брусчатка", price: "1000", unit: "м²", desc: "Брусчатка серая, толщина 4 см, 50 шт/м²" },
+            { name: "Брусчатка 6см", category: "tiles", subcategory: "Брусчатка", price: "1200", unit: "м²", desc: "Брусчатка серая, толщина 6 см, 50 шт/м²" },
+            { name: "Брусчатка красная 4см", category: "tiles", subcategory: "Брусчатка", price: "1400", unit: "м²", desc: "Брусчатка красная, толщина 4 см" },
+            { name: "Брусчатка коричневая 4см", category: "tiles", subcategory: "Брусчатка", price: "1400", unit: "м²", desc: "Брусчатка коричневая, толщина 4 см" },
+            { name: "Брусчатка жёлтая 4см", category: "tiles", subcategory: "Брусчатка", price: "1500", unit: "м²", desc: "Брусчатка жёлтая, толщина 4 см" },
+            
+            // Кирпич и блоки
+            { name: "Кирпич одинарный трубный", category: "bricks", subcategory: "Кирпич", price: "22", unit: "шт", desc: "Кирпич трубный одинарный, 448 шт в пачке" },
+            { name: "Кирпич одинарный полнотелый", category: "bricks", subcategory: "Кирпич", price: "23", unit: "шт", desc: "Кирпич полнотелый одинарный, 448 шт в пачке" },
+            { name: "Кирпич полуторный трубный", category: "bricks", subcategory: "Кирпич", price: "25", unit: "шт", desc: "Кирпич трубный полуторный, 352 шт в пачке" },
+            { name: "Кирпич полуторный щелевой", category: "bricks", subcategory: "Кирпич", price: "22", unit: "шт", desc: "Кирпич щелевой полуторный, 352 шт в пачке" },
+            { name: "Кирпич облицовочный красный", category: "bricks", subcategory: "Кирпич", price: "26", unit: "шт", desc: "Кирпич облицовочный красный, 396 шт в пачке" },
+            { name: "Кирпич облицовочный коричневый", category: "bricks", subcategory: "Кирпич", price: "40", unit: "шт", desc: "Кирпич облицовочный коричневый" },
+            { name: "Газоблок 600x200x300", category: "bricks", subcategory: "Блоки", price: "220", unit: "шт", desc: "Газобетонный блок 600x200x300 мм" },
+            { name: "Сетка 100x100 (2x1м)", category: "bricks", subcategory: "Сетка", price: "250", unit: "шт", desc: "Сетка кладочная, ячейка 100x100, 2x1 м" },
+            
+            // Пиломатериалы
+            { name: "Тёс 200x25x6м (2 сорт)", category: "wood", subcategory: "Доска", price: "485", unit: "шт", desc: "Тёс 200x25x6м, 2 сорт с обзолом, 33 шт/м³ (16000 ₽/м³)" },
+            { name: "Тёс 150x25x6м (2 сорт)", category: "wood", subcategory: "Доска", price: "365", unit: "шт", desc: "Тёс 150x25x6м, 2 сорт с обзолом, 44 шт/м³ (16000 ₽/м³)" },
+            { name: "Тёс 200x25x6м (1 сорт)", category: "wood", subcategory: "Доска", price: "450", unit: "шт", desc: "Тёс 200x25x6м, 1 сорт, 33 шт/м³ (19800 ₽/м³)" },
+            { name: "Доска 150x50x6м", category: "wood", subcategory: "Доска", price: "860", unit: "шт", desc: "Доска обрезная 150x50x6м, 1 сорт, 22 шт/м³ (19000 ₽/м³)" },
+            { name: "Доска 200x50x6м", category: "wood", subcategory: "Доска", price: "1380", unit: "шт", desc: "Доска обрезная 200x50x6м, 1 сорт, 16.5 шт/м³ (19000 ₽/м³)" },
+            { name: "Брус 150x150x6м", category: "wood", subcategory: "Брус", price: "2100", unit: "шт", desc: "Брус 150x150x6м, 1 сорт, 9 шт/м³ (19000 ₽/м³)" },
+            { name: "Брус 150x100x6м", category: "wood", subcategory: "Брус", price: "950", unit: "шт", desc: "Брус 150x100x6м, 1 сорт, 20 шт/м³ (19000 ₽/м³)" },
+            { name: "Брус 100x50x6м", category: "wood", subcategory: "Брус", price: "575", unit: "шт", desc: "Брус 100x50x6м, 1 сорт, 33 шт/м³ (19000 ₽/м³)" },
+            
+            // Трубы
+            { name: "Труба 3м", category: "pipes", subcategory: "Трубы", price: "1100", unit: "шт", desc: "Труба асбестоцементная/бетонная, 3 метра" },
+            { name: "Труба 2м", category: "pipes", subcategory: "Трубы", price: "750", unit: "шт", desc: "Труба асбестоцементная/бетонная, 2 метра" },
+            { name: "Труба 1м", category: "pipes", subcategory: "Трубы", price: "450", unit: "шт", desc: "Труба асбестоцементная/бетонная, 1 метр" },
+            { name: "Загиб 45°", category: "pipes", subcategory: "Комплектующие", price: "100", unit: "шт", desc: "Загиб (отвод) 45 градусов" },
+            { name: "Загиб 90°", category: "pipes", subcategory: "Комплектующие", price: "100", unit: "шт", desc: "Загиб (отвод) 90 градусов" },
+            { name: "Тройник", category: "pipes", subcategory: "Комплектующие", price: "180", unit: "шт", desc: "Тройник для труб" }
+        ];
+
+        // ===== ОТОБРАЖЕНИЕ ТОВАРОВ =====
+        const grid = document.getElementById('productsGrid');
+        const countSpan = document.getElementById('countValue');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+        // Функция форматирования цены
+        function formatPrice(price) {
+            return parseInt(price).toLocaleString('ru-RU');
+        }
+
+        // Выбор иконки по категории
+        function getIcon(category) {
+            const icons = {
+                'cement': 'fa-cube',
+                'rings': 'fa-circle',
+                'tiles': 'fa-border-all',
+                'bricks': 'fa-cubes',
+                'wood': 'fa-tree',
+                'pipes': 'fa-grip-lines'
+            };
+            return icons[category] || 'fa-box';
+        }
+
+        // Рендер товаров
+        function renderProducts() {
+            let filtered = products.filter(p => {
+                // Фильтр по категории
+                if (currentCategory !== 'all' && p.category !== currentCategory) return false;
+                // Фильтр по поиску
+                if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+                return true;
+            });
+
+            countSpan.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="fas fa-search" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i><br>Товары не найдены<br><span style="font-size: 14px;">Попробуйте изменить запрос или категорию</span></div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card" data-category="${p.category}">
+                    <div class="product-img">
+                        <i class="fas ${getIcon(p.category)}"></i>
+                    </div>
+                    <div class="product-category">${p.subcategory}</div>
+                    <div class="product-title">${p.name}</div>
+                    <div class="product-desc">${p.desc}</div>
+                    <div class="product-footer">
+                        <div class="product-price">${formatPrice(p.price)} ₽ <small>/${p.unit}</small></div>
+                        <button class="cart-btn"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Перепривязываем кнопки корзины
+            document.querySelectorAll('.cart-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const originalIcon = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    this.style.background = '#22c55e';
+                    this.style.color = 'white';
+                    setTimeout(() => {
+                        this.innerHTML = originalIcon;
+                        this.style.background = '';
+                        this.style.color = '';
+                    }, 800);
+                });
+            });
+        }
+
+        // Переключение категорий
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = this.dataset.category;
+                renderProducts();
+            });
+        });
+
+        // Поиск
+        function performSearch() {
+            searchQuery = searchInput.value.trim();
+            renderProducts();
+        }
+
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
         // ===== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ =====
         const themeToggle = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
         
-        // Проверяем сохранённую тему
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             htmlElement.setAttribute('data-theme', savedTheme);
         }
         
-        // Переключение по клику
         themeToggle.addEventListener('click', function() {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         });
-        
-        // ===== ФИЛЬТРЫ =====
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-        
-        // ===== АНИМАЦИЯ КНОПКИ В КОРЗИНУ =====
-        const cartButtons = document.querySelectorAll('.cart-btn');
-        cartButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const originalIcon = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-check"></i>';
-                this.style.background = '#22c55e';
-                this.style.color = 'white';
-                setTimeout(() => {
-                    this.innerHTML = originalIcon;
-                    this.style.background = '';
-                    this.style.color = '';
-                }, 800);
-            });
-        });
+
+        // Первичный рендер
+        renderProducts();
     })();
 </script>
 
