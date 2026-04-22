@@ -566,24 +566,11 @@
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
         }
 
         .footer-copyright {
             color: var(--text-muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: var(--nav-link-color);
-            font-weight: 500;
         }
 
         .no-results {
@@ -611,11 +598,6 @@
             
             .contacts-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 20px;
             }
 
             .categories-tabs {
@@ -699,6 +681,7 @@
                     <div class="slider-slide">
                         <img src="https://i.ibb.co/YFXX7Fth/XXXL.webp" alt="Кольца ЖБИ">
                     </div>
+                </div>
                 <!-- Точки -->
                 <div class="slider-dots" id="sliderDots"></div>
                 <!-- Стрелки -->
@@ -805,7 +788,7 @@
         }
 
         function startAutoSlide() {
-            slideInterval = setInterval(nextSlide, 4000); // Смена каждые 4 секунды
+            slideInterval = setInterval(nextSlide, 4000);
         }
 
         function stopAutoSlide() {
@@ -824,7 +807,6 @@
             startAutoSlide();
         });
 
-        // Останавливаем автопрокрутку при наведении
         const slider = document.getElementById('heroSlider');
         slider.addEventListener('mouseenter', stopAutoSlide);
         slider.addEventListener('mouseleave', startAutoSlide);
