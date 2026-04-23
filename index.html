@@ -411,6 +411,30 @@
             font-size: 48px;
             color: var(--gradient-start);
             overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-img::after {
+            content: '🔍';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-img:hover::after {
+            opacity: 1;
         }
 
         .product-img img {
@@ -459,6 +483,83 @@
             font-weight: 400;
             font-size: 14px;
             color: var(--text-muted);
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО ===== */
+        .photo-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+        }
+
+        .photo-modal-overlay.active {
+            display: flex;
+        }
+
+        .photo-modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-modal-content img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-modal-close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: white;
+            font-size: 28px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 2001;
+        }
+
+        .photo-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .photo-modal-name {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 100px;
+            z-index: 2001;
         }
 
         /* ===== БАННЕР С ТЕЛЕФОНОМ ===== */
@@ -617,6 +718,20 @@
             .hero-slider {
                 aspect-ratio: 1 / 1;
             }
+
+            .photo-modal-close {
+                top: 10px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+            }
+
+            .photo-modal-name {
+                bottom: 20px;
+                font-size: 14px;
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
@@ -638,6 +753,15 @@
         </nav>
     </div>
 </header>
+
+<!-- Модальное окно для фото -->
+<div class="photo-modal-overlay" id="photoModal">
+    <button class="photo-modal-close" id="closePhotoModal"><i class="fas fa-times"></i></button>
+    <div class="photo-modal-content">
+        <img src="" alt="" id="photoModalImg">
+    </div>
+    <div class="photo-modal-name" id="photoModalName"></div>
+</div>
 
 <main>
     <div class="container">
@@ -757,7 +881,6 @@
         let currentSlide = 0;
         let slideInterval;
 
-        // Создаём точки
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.classList.add('slider-dot');
@@ -771,7 +894,6 @@
         function goToSlide(index) {
             slides.forEach(s => s.classList.remove('active'));
             dots.forEach(d => d.classList.remove('active'));
-            
             slides[index].classList.add('active');
             dots[index].classList.add('active');
             currentSlide = index;
@@ -795,23 +917,47 @@
             clearInterval(slideInterval);
         }
 
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            stopAutoSlide();
-            startAutoSlide();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            stopAutoSlide();
-            startAutoSlide();
-        });
+        prevBtn.addEventListener('click', () => { prevSlide(); stopAutoSlide(); startAutoSlide(); });
+        nextBtn.addEventListener('click', () => { nextSlide(); stopAutoSlide(); startAutoSlide(); });
 
         const slider = document.getElementById('heroSlider');
         slider.addEventListener('mouseenter', stopAutoSlide);
         slider.addEventListener('mouseleave', startAutoSlide);
 
         startAutoSlide();
+
+        // ===== МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО =====
+        const photoModal = document.getElementById('photoModal');
+        const photoModalImg = document.getElementById('photoModalImg');
+        const photoModalName = document.getElementById('photoModalName');
+        const closePhotoModal = document.getElementById('closePhotoModal');
+
+        function openPhotoModal(imgSrc, productName) {
+            photoModalImg.src = imgSrc;
+            photoModalImg.alt = productName;
+            photoModalName.textContent = productName;
+            photoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhotoModalFunc() {
+            photoModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closePhotoModal.addEventListener('click', closePhotoModalFunc);
+        photoModal.addEventListener('click', function(e) {
+            if (e.target === photoModal || e.target === photoModalImg) {
+                closePhotoModalFunc();
+            }
+        });
+
+        // Закрытие по клавише Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && photoModal.classList.contains('active')) {
+                closePhotoModalFunc();
+            }
+        });
 
         // ===== КАТАЛОГ =====
         const products = [
@@ -905,7 +1051,9 @@
             if (!f.length) { grid.innerHTML = '<div class="no-results"><i class="fas fa-search"></i><br>Товары не найдены</div>'; return; }
             grid.innerHTML = f.map(p => `
                 <div class="product-card">
-                    <div class="product-img">${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<i class="fas ${getIcon(p.category)}"></i>`}</div>
+                    <div class="product-img" ${p.image ? `onclick="openPhotoModal('${p.image}', '${p.name.replace(/'/g, "\\'")}')"` : ''}>
+                        ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` : `<i class="fas ${getIcon(p.category)}"></i>`}
+                    </div>
                     <div class="product-category">${p.subcategory}</div>
                     <div class="product-title">${p.name}</div>
                     <div class="product-desc">${p.desc}</div>
@@ -913,6 +1061,9 @@
                 </div>
             `).join('');
         }
+
+        // Делаем функцию открытия модалки глобальной
+        window.openPhotoModal = openPhotoModal;
 
         document.querySelectorAll('.category-tab').forEach(t => t.addEventListener('click', function() {
             document.querySelectorAll('.category-tab').forEach(x => x.classList.remove('active'));
