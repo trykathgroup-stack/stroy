@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СТРОЙ БАЗА | Стройматериалы</title>
 
+    <!-- Meta-теги безопасности -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔨</text></svg>">
     
     <!-- Шрифты -->
@@ -1042,6 +1046,11 @@
             { id: 64, name: "Тройник", category: "pipes", subcategory: "Комплектующие", price: 180, unit: "шт", desc: "Тройник", image: "https://i.ibb.co/G4gn26yH/image.png" }
         ];
 
+        // Функция для безопасного экранирования HTML
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+        }
+
         function formatPrice(p) { return p.toLocaleString('ru-RU'); }
         function getIcon(c) { const i = { cement: 'fa-cube', rings: 'fa-circle', tiles: 'fa-border-all', bricks: 'fa-cubes', wood: 'fa-tree', pipes: 'fa-grip-lines' }; return i[c] || 'fa-box'; }
 
@@ -1054,17 +1063,27 @@
             let f = products.filter(p => (curCat === 'all' || p.category === curCat) && (!sQ || p.name.toLowerCase().includes(sQ.toLowerCase())));
             cnt.textContent = f.length;
             if (!f.length) { grid.innerHTML = '<div class="no-results"><i class="fas fa-search"></i><br>Товары не найдены</div>'; return; }
-            grid.innerHTML = f.map(p => `
+            grid.innerHTML = f.map(p => {
+                const safeName = escapeHtml(p.name);
+                const safeDesc = escapeHtml(p.desc);
+                const safeSubcategory = escapeHtml(p.subcategory);
+                const safeImage = escapeHtml(p.image);
+                const safePrice = formatPrice(p.price);
+                const safeUnit = escapeHtml(p.unit);
+                const icon = getIcon(p.category);
+
+                return `
                 <div class="product-card">
-                    <div class="product-img" ${p.image ? `onclick="openPhotoModal('${p.image}', '${p.name.replace(/'/g, "\\'")}')"` : ''}>
-                        ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` : `<i class="fas ${getIcon(p.category)}"></i>`}
+                    <div class="product-img" ${p.image ? `onclick="openPhotoModal('${safeImage}', '${safeName}')"` : ''}>
+                        ${p.image ? `<img src="${safeImage}" alt="${safeName}" loading="lazy">` : `<i class="fas ${icon}"></i>`}
                     </div>
-                    <div class="product-category">${p.subcategory}</div>
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-desc">${p.desc}</div>
-                    <div class="product-price">${formatPrice(p.price)} ₽ <small>/${p.unit}</small></div>
+                    <div class="product-category">${safeSubcategory}</div>
+                    <div class="product-title">${safeName}</div>
+                    <div class="product-desc">${safeDesc}</div>
+                    <div class="product-price">${safePrice} ₽ <small>/${safeUnit}</small></div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Делаем функцию открытия модалки глобальной
